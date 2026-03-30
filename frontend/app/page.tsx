@@ -8,17 +8,26 @@ export default function Home() {
   const [budget, setBudget] = useState("");
   const [result, setResult] = useState("");
 
-  const handleGenerate = async () => {
-    // For now just mock (AI tomorrow)
-    setResult("🚀 Your AI startup will appear here...");
-  };
+ const handleGenerate = async () => {
+  const res = await fetch("/api/generate", {
+    method: "POST",
+    body: JSON.stringify({
+      skills,
+      time,
+      budget,
+    }),
+  });
+
+  const data = await res.json();
+  setResult(data.data);
+};
 
   return (
     <main className="min-h-screen bg-black text-white flex flex-col items-center justify-center px-4">
       
       {/* Title */}
       <h1 className="text-4xl font-bold mb-2">
-        AutoFounder 🚀
+        stlaunch
       </h1>
 
       <p className="text-gray-400 mb-8 text-center max-w-md">
